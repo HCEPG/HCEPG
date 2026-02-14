@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,60 +60,228 @@ body {
 
 <body>
 
-<h2 style="text-align:center; font-weight:600;">
-2026 RPNCE Study Guide: Multiple Choice Examination
-</h2>
-
-<div class="quiz-box">
-  <div class="quiz-question">
-    Question 1: If back pain, chills, or fever occur during transfusion, what is the FIRST action?
-  </div>
-
-  <div class="quiz-option" onclick="selectAnswer(this, true)">
-    Stop the transfusion and maintain IV with normal saline
-  </div>
-
-  <div class="quiz-option" onclick="selectAnswer(this, false)">
-    Slow the infusion
-  </div>
-
-  <div class="quiz-option" onclick="selectAnswer(this, false)">
-    Continue monitoring
-  </div>
-
-  <div class="quiz-option" onclick="selectAnswer(this, false)">
-    Administer antihistamine only
-  </div>
-
-  <div class="quiz-feedback"></div>
-</div>
+<h2 style="text-align:center; font-weight:600;">2026 RPNCE Study Guide: Multiple Choice Examination</h2>
+<div id="quiz-container"></div>
 
 <script>
-function selectAnswer(element, isCorrect) {
-  const box = element.parentElement;
-  const options = box.querySelectorAll(".quiz-option");
-  const feedback = box.querySelector(".quiz-feedback");
 
-  options.forEach(opt => {
-    opt.classList.remove("correct", "incorrect");
-    opt.onclick = null;  // lock answers after selection
+const questions = [
+
+{
+q: "What are the correct medication math answers?",
+options: [
+"3000 mL, 125 mL, 0.5 mL, 360 mL, 12–13 gtts/min, 17–18 gtts/min, 21 gtts/min, 31 gtts/min, decrease flow rate by 50 gtt/min",
+"2500 mL, 100 mL, 1 mL, 300 mL, 10 gtts/min",
+"3200 mL, 150 mL, 2 mL, 400 mL",
+"2000 mL, 90 mL, 0.25 mL"
+],
+correct: 0,
+rationales: [
+"CORRECT: These calculations reflect proper dimensional analysis and drip rate formulas. Accurate medication math prevents underdosing, overdosing, fluid overload, and hemodynamic instability.",
+"INCORRECT: These values reflect miscalculated volume conversions and incorrect drop factor application, which could lead to subtherapeutic or unsafe dosing.",
+"INCORRECT: These values significantly exceed correct calculated volumes and represent potential overdose risk.",
+"INCORRECT: These calculations underestimate required dosing and could result in ineffective therapy."
+]
+},
+
+{
+q: "What is the correct response to something unusual that may require physician intervention?",
+options: [
+"Gather vitals and assessment data, complete SBAR, then contact the physician",
+"Contact the physician immediately without assessment",
+"Document and reassess later",
+"Ask another nurse to call"
+],
+correct: 0,
+rationales: [
+"CORRECT: The nurse must assess first to provide organized SBAR communication. Clinical data supports safe decision-making and prevents incomplete reporting.",
+"INCORRECT: Calling without assessment limits clinical clarity and delays appropriate intervention planning.",
+"INCORRECT: Documentation alone does not address potential deterioration requiring medical intervention.",
+"INCORRECT: Delegation does not replace the nurse’s responsibility to assess and communicate findings."
+]
+},
+
+{
+q: "If back pain, chills, hives, or fever occur during a transfusion, what is the FIRST action?",
+options: [
+"Stop the transfusion and maintain IV with normal saline",
+"Slow the infusion",
+"Continue monitoring",
+"Administer antihistamine only"
+],
+correct: 0,
+rationales: [
+"CORRECT: Transfusion must be stopped immediately to prevent worsening hemolytic or septic reaction. Maintaining IV access with normal saline preserves venous access.",
+"INCORRECT: Slowing the infusion does not remove the offending antigen and allows reaction progression.",
+"INCORRECT: Monitoring alone exposes the patient to continued antigen exposure.",
+"INCORRECT: Medication may be ordered later, but stopping the transfusion is the priority intervention."
+]
+},
+
+{
+q: "How many hours may blood hang before discontinuation?",
+options: [
+"4 hours",
+"6 hours",
+"8 hours",
+"No maximum time limit"
+],
+correct: 0,
+rationales: [
+"CORRECT: Blood must be infused within 4 hours due to increased bacterial growth risk at room temperature.",
+"INCORRECT: 6 hours exceeds safe transfusion standards and increases infection risk.",
+"INCORRECT: 8 hours significantly increases sepsis risk.",
+"INCORRECT: There is always a 4-hour maximum limit."
+]
+},
+
+{
+q: "Each leg represents what percentage in the adult Rule of 9’s?",
+options: ["9%", "12%", "18%", "21%"],
+correct: 2,
+rationales: [
+"INCORRECT: 9% applies to each arm.",
+"INCORRECT: 12% is not part of adult burn calculation.",
+"CORRECT: Each leg equals 18% total body surface area (9% anterior and 9% posterior).",
+"INCORRECT: 21% is not used in standardized burn estimation."
+]
+},
+
+{
+q: "Most common symptom of systemic lupus erythematosus?",
+options: ["Malar rash", "Fatigue", "Renal colic", "Hemoptysis"],
+correct: 1,
+rationales: [
+"INCORRECT: The malar rash is characteristic but not most common.",
+"CORRECT: Fatigue is the most frequently reported symptom due to chronic autoimmune inflammation.",
+"INCORRECT: Renal involvement does not present as renal colic.",
+"INCORRECT: Hemoptysis is not a typical presenting symptom."
+]
+},
+
+{
+q: "Most common symptom of multiple sclerosis?",
+options: ["Fatigue", "Chronic cough", "Persistent fever", "Diarrhea"],
+correct: 0,
+rationales: [
+"CORRECT: Fatigue is the most common symptom in MS due to demyelination and central nervous system dysfunction.",
+"INCORRECT: MS is neurological, not respiratory.",
+"INCORRECT: Fever is not a defining MS feature.",
+"INCORRECT: Diarrhea is unrelated to demyelinating pathology."
+]
+},
+
+{
+q: "Best indicator of acute dehydration in children?",
+options: ["Daily weight", "Dry lips", "Skin turgor", "Urine color"],
+correct: 0,
+rationales: [
+"CORRECT: Daily weight is the most sensitive and objective indicator of fluid loss.",
+"INCORRECT: Dry lips indicate dehydration but are less reliable than weight.",
+"INCORRECT: Skin turgor may be unreliable in pediatric patients.",
+"INCORRECT: Urine color is subjective and not the most accurate assessment."
+]
+},
+
+{
+q: "Target oxygen saturation for COPD patients?",
+options: ["100%", "95–100%", "88–92%", "Above 98%"],
+correct: 2,
+rationales: [
+"INCORRECT: 100% may suppress hypoxic drive in CO2 retainers.",
+"INCORRECT: 95–100% increases risk of hypercapnia.",
+"CORRECT: 88–92% balances oxygenation while minimizing CO2 retention.",
+"INCORRECT: Above 98% is not recommended in chronic CO2 retainers."
+]
+},
+
+{
+q: "Treatment for conscious hypoglycemic patient?",
+options: ["15 g rapid oral glucose", "IV D50", "Insulin", "Observe only"],
+correct: 0,
+rationales: [
+"CORRECT: 15 g rapid-acting carbohydrate is first-line for conscious hypoglycemia.",
+"INCORRECT: IV D50 is used when patient is unconscious or severely symptomatic.",
+"INCORRECT: Insulin worsens hypoglycemia.",
+"INCORRECT: Delaying treatment risks neurological injury."
+]
+},
+
+{
+q: "Treatment for unconscious hypoglycemic patient?",
+options: ["IV D50 or IM glucagon", "Oral glucose", "Insulin", "Wait for labs"],
+correct: 0,
+rationales: [
+"CORRECT: Immediate IV dextrose or IM glucagon restores blood glucose rapidly.",
+"INCORRECT: Oral intake risks aspiration.",
+"INCORRECT: Insulin is contraindicated.",
+"INCORRECT: Treatment must not be delayed for laboratory confirmation."
+]
+}
+
+];
+
+while (questions.length < 50) {
+  questions.push({
+    q: "Clinical prioritization scenario placeholder – full expansion scheduled for master build weekend.",
+    options: [
+      "Airway first",
+      "Routine task first",
+      "Delegate without assessment",
+      "Delay intervention"
+    ],
+    correct: 0,
+    rationales: [
+      "CORRECT: Airway management is highest priority under ABC emergency framework.",
+      "INCORRECT: Routine care is secondary to life-threatening concerns.",
+      "INCORRECT: Assessment must precede delegation.",
+      "INCORRECT: Delayed intervention increases risk of deterioration."
+    ]
+  });
+}
+
+const container = document.getElementById("quiz-container");
+
+questions.forEach((item, index) => {
+  const box = document.createElement("div");
+  box.className = "quiz-box";
+
+  const question = document.createElement("div");
+  question.className = "quiz-question";
+  question.innerText = "Question " + (index+1) + ": " + item.q;
+  box.appendChild(question);
+
+  item.options.forEach((opt, i) => {
+    const option = document.createElement("div");
+    option.className = "quiz-option";
+    option.innerText = opt;
+
+    option.onclick = function() {
+      const feedback = box.querySelector(".quiz-feedback");
+      box.querySelectorAll(".quiz-option").forEach(o => o.classList.remove("correct","incorrect"));
+
+      if(i === item.correct){
+        option.classList.add("correct");
+        feedback.className = "quiz-feedback feedback-correct";
+      } else {
+        option.classList.add("incorrect");
+        feedback.className = "quiz-feedback feedback-incorrect";
+      }
+
+      feedback.innerText = item.rationales[i];
+      feedback.style.display = "block";
+    };
+
+    box.appendChild(option);
   });
 
-  if (isCorrect) {
-    element.classList.add("correct");
-    feedback.className = "quiz-feedback feedback-correct";
-    feedback.innerText =
-      "CORRECT: The transfusion must be stopped immediately to prevent worsening hemolytic or septic reaction. Maintaining IV access with normal saline preserves venous access for emergency medications.";
-  } else {
-    element.classList.add("incorrect");
-    feedback.className = "quiz-feedback feedback-incorrect";
-    feedback.innerText =
-      "INCORRECT: Continuing the transfusion or delaying intervention allows antigen exposure to continue and increases risk of severe hemolysis or anaphylaxis. The FIRST action is to stop the transfusion.";
-  }
+  const feedback = document.createElement("div");
+  feedback.className = "quiz-feedback";
+  box.appendChild(feedback);
 
-  feedback.style.display = "block";
-}
+  container.appendChild(box);
+});
+
 </script>
-
 </body>
 </html>
